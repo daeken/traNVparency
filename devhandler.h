@@ -37,9 +37,14 @@ public:
 class ChannelDevice : public BaseDevice {
 public:
 	virtual int ioctl(uint32_t request, void *data);
+
+protected:
+	virtual shared_ptr<ChannelDevice> construct() = 0;
 };
 
 class NvhostGpuDevice : public ChannelDevice {
+protected:
+	virtual shared_ptr<ChannelDevice> construct();
 };
 
 int handle_open(const char *pathname, int flags, bool &handled);
