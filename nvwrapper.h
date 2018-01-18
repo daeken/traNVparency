@@ -8,6 +8,7 @@
 
 using namespace std;
 
+#include "ioctls.h"
 #include "utils.h"
 #include "devhandler.h"
 #include "hooks.h"

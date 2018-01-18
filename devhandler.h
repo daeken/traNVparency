@@ -11,7 +11,7 @@ public:
 		free((void *) name);
 	}
 
-	int pass_ioctl(uint32_t request, void *data);
+	int pass_ioctl(uint32_t request, void *data, bool debug = false);
 
 	virtual int ioctl(uint32_t request, void *data) = 0;
 
@@ -22,6 +22,19 @@ public:
 class NvmapDevice : public BaseDevice {
 public:
 	virtual int ioctl(uint32_t request, void *data);
+};
+
+class NvhostCtrlGpuDevice : public BaseDevice {
+public:
+	virtual int ioctl(uint32_t request, void *data);
+};
+
+class ChannelDevice : public BaseDevice {
+public:
+	virtual int ioctl(uint32_t request, void *data);
+};
+
+class NvhostGpuDevice : public ChannelDevice {
 };
 
 int handle_open(const char *pathname, int flags, bool &handled);

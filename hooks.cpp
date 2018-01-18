@@ -24,8 +24,8 @@ int (*real_ioctl)(int, unsigned long, void *);
 extern "C" {
 	extern void *_dl_sym(void *, const char *, void *);
 	void *orig_dlsym(void *handle, const char *name) {
-		static void * (*real_dlsym)(void *, const char *) = NULL;
-		if (real_dlsym == NULL)
+		static void * (*real_dlsym)(void *, const char *) = nullptr;
+		if (real_dlsym == nullptr)
 			real_dlsym = (void* (*)(void*, const char*)) _dl_sym(RTLD_NEXT, "dlsym", (void *) orig_dlsym);
 		return real_dlsym(handle, name);
 	}
@@ -44,14 +44,17 @@ extern "C" {
 	int open(const char *pathname, int flags) {
 		fuckfds();
 
-		if(real_open == NULL)
+		if(real_open == nullptr)
 			real_open = (int (*)(const char *, int)) orig_dlsym(RTLD_NEXT, "open");
 
 		bool handled;
 		auto hfd = handle_open(pathname, flags, handled);
 		if(handled)
 			return hfd;
-		return real_open(pathname, flags);
+		hfd = real_open(pathname, flags);
+		if(hfd >= 0)
+			printf("Opened unknown file %s to 0x%x\n", pathname, hfd);
+		return hfd;
 	}
 
 	int export_open(const char *pathname, int flags) {
@@ -59,7 +62,7 @@ extern "C" {
 	}
 
 	int ioctl(int fd, unsigned long request, void *data) {
-		if(real_ioctl == NULL)
+		if(real_ioctl == nullptr)
 			real_ioctl = (int (*)(int, unsigned long, void *)) orig_dlsym(RTLD_NEXT, "ioctl");
 		bool handled;
 		auto ret = handle_ioctl(fd, request, data, handled);
@@ -69,9 +72,9 @@ extern "C" {
 	}
 
 	int close(int fd) {
-		printf("Closing %i\n", fd);
-		static int (*real_close)(int) = NULL;
-		if(real_close == NULL)
+		printf("Closing 0x%x\n", fd);
+		static int (*real_close)(int) = nullptr;
+		if(real_close == nullptr)
 			real_close = (int (*)(int)) orig_dlsym(RTLD_NEXT, "close");
 		bool handled;
 		auto ret = handle_close(fd, handled);
