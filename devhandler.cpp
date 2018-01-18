@@ -29,8 +29,9 @@ int BaseDevice::pass_ioctl(uint32_t request, void *data, bool debug) {
 
 unordered_map<int, shared_ptr<BaseDevice>> devices;
 
-int add_device(const char *name, int flags, shared_ptr<BaseDevice> dev) {
-	auto fd = real_open(name, flags);
+int add_device(const char *name, int flags, shared_ptr<BaseDevice> dev, int fd) {
+	if(fd == -1)
+		fd = real_open(name, flags);
 	printf("Adding device 0x%x from %s\n", fd, name);
 	dev->name = strdup(name);
 	dev->fd = fd;

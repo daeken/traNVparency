@@ -2,6 +2,53 @@
 
 #include "nvwrapper.h"
 
+const char *ioctl2str(LinuxNvhostChannelIoctl value) {
+	switch(value) {
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_ZCULL_BIND:
+		return "NVGPU_IOCTL_CHANNEL_ZCULL_BIND";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_CYCLE_STATS:
+		return "NVGPU_IOCTL_CHANNEL_CYCLE_STATS";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_CYCLE_STATS_SNAPSHOT:
+		return "NVGPU_IOCTL_CHANNEL_CYCLE_STATS_SNAPSHOT";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_ALLOC_OBJ_CTX:
+		return "NVGPU_IOCTL_CHANNEL_ALLOC_OBJ_CTX";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_SET_TIMEOUT_EX:
+		return "NVGPU_IOCTL_CHANNEL_SET_TIMEOUT_EX";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_GET_TIMEDOUT:
+		return "NVGPU_IOCTL_CHANNEL_GET_TIMEDOUT";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_FORCE_RESET:
+		return "NVGPU_IOCTL_CHANNEL_FORCE_RESET";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_ALLOC_GPFIFO:
+		return "NVGPU_IOCTL_CHANNEL_ALLOC_GPFIFO";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_SUBMIT_GPFIFO:
+		return "NVGPU_IOCTL_CHANNEL_SUBMIT_GPFIFO";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_SET_TIMEOUT:
+		return "NVGPU_IOCTL_CHANNEL_SET_TIMEOUT";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_SET_NVMAP_FD:
+		return "NVGPU_IOCTL_CHANNEL_SET_NVMAP_FD";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_ENABLE:
+		return "NVGPU_IOCTL_CHANNEL_ENABLE";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_FREE_OBJ_CTX:
+		return "NVGPU_IOCTL_CHANNEL_FREE_OBJ_CTX";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_EVENTS_CTRL:
+		return "NVGPU_IOCTL_CHANNEL_EVENTS_CTRL";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_WAIT:
+		return "NVGPU_IOCTL_CHANNEL_WAIT";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_OPEN:
+		return "NVGPU_IOCTL_CHANNEL_OPEN";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_DISABLE:
+		return "NVGPU_IOCTL_CHANNEL_DISABLE";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_PREEMPT:
+		return "NVGPU_IOCTL_CHANNEL_PREEMPT";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_SET_ERROR_NOTIFIER:
+		return "NVGPU_IOCTL_CHANNEL_SET_ERROR_NOTIFIER";
+	case LinuxNvhostChannelIoctl::NVGPU_IOCTL_CHANNEL_SET_PRIORITY:
+		return "NVGPU_IOCTL_CHANNEL_SET_PRIORITY";
+	default:
+		return "UNKNOWN";
+	}
+}
+
 const char *ioctl2str(LinuxNvhostCtrlGpuIoctl value) {
 	switch(value) {
 	case LinuxNvhostCtrlGpuIoctl::NVGPU_GPU_IOCTL_GET_TPC_EXCEPTION_EN_STATUS:
