@@ -49,6 +49,35 @@ const char *ioctl2str(LinuxNvhostChannelIoctl value) {
 	}
 }
 
+const char *ioctl2str(LinuxNvhostAsGpuIoctl value) {
+	switch(value) {
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_GET_VA_REGIONS:
+		return "NVGPU_AS_IOCTL_GET_VA_REGIONS";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_MAP_BUFFER:
+		return "NVGPU_AS_IOCTL_MAP_BUFFER";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_FREE_SPACE:
+		return "NVGPU_AS_IOCTL_FREE_SPACE";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_ALLOC_SPACE:
+		return "NVGPU_AS_IOCTL_ALLOC_SPACE";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_MAP_BUFFER_BATCH:
+		return "NVGPU_AS_IOCTL_MAP_BUFFER_BATCH";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_MAP_BUFFER_EX:
+		return "NVGPU_AS_IOCTL_MAP_BUFFER_EX";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_UNMAP_BUFFER:
+		return "NVGPU_AS_IOCTL_UNMAP_BUFFER";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_MAP_BUFFER_COMPBITS:
+		return "NVGPU_AS_IOCTL_MAP_BUFFER_COMPBITS";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_BIND_CHANNEL:
+		return "NVGPU_AS_IOCTL_BIND_CHANNEL";
+	case LinuxNvhostAsGpuIoctl::NVGPU_AS_IOCTL_GET_BUFFER_COMPBITS_INFO:
+		return "NVGPU_AS_IOCTL_GET_BUFFER_COMPBITS_INFO";
+	case LinuxNvhostAsGpuIoctl::NVGPU32_AS_IOCTL_ALLOC_SPACE:
+		return "NVGPU32_AS_IOCTL_ALLOC_SPACE";
+	default:
+		return "UNKNOWN";
+	}
+}
+
 const char *ioctl2str(LinuxNvhostCtrlGpuIoctl value) {
 	switch(value) {
 	case LinuxNvhostCtrlGpuIoctl::NVGPU_GPU_IOCTL_GET_TPC_EXCEPTION_EN_STATUS:
