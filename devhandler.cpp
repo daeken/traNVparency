@@ -27,7 +27,13 @@ int BaseDevice::pass_ioctl(uint32_t request, void *data, bool debug) {
 	return real_ioctl(fd, request, data);
 }
 
-unordered_map<int, shared_ptr<BaseDevice>> devices;
+unordered_map<int, shared_ptr<BaseDevice>> *devices = NULL;
+
+void ensure_devices() {
+	if(devices != NULL)
+		return;
+	devices = new unordered_map<int, shared_ptr<BaseDevice>>();
+}
 
 int add_device(const char *name, int flags, shared_ptr<BaseDevice> dev, int fd) {
 	if(fd == -1)
@@ -35,14 +41,17 @@ int add_device(const char *name, int flags, shared_ptr<BaseDevice> dev, int fd) 
 	printf("Adding device 0x%x from %s\n", fd, name);
 	dev->name = strdup(name);
 	dev->fd = fd;
-	devices[fd] = dev;
+	(*devices)[fd] = dev;
 	return fd;
 }
 
 int handle_open(const char *pathname, int flags, bool &handled) {
+	ensure_devices();
 	handled = true;
 	if(!strcmp(pathname, "/dev/nvmap"))
 		return add_device(pathname, flags, make_shared<NvmapDevice>());
+	else if(!strcmp(pathname, "/dev/nvhost-ctrl"))
+		return add_device(pathname, flags, make_shared<NvhostCtrlDevice>());
 	else if(!strcmp(pathname, "/dev/nvhost-ctrl-gpu"))
 		return add_device(pathname, flags, make_shared<NvhostCtrlGpuDevice>());
 	else if(!strcmp(pathname, "/dev/nvhost-gpu"))
@@ -54,9 +63,10 @@ int handle_open(const char *pathname, int flags, bool &handled) {
 }
 
 int handle_ioctl(int fd, unsigned long request, void *data, bool &handled) {
+	ensure_devices();
 	handled = true;
-	if(devices.find(fd) != devices.end())
-		return devices[fd]->ioctl((uint32_t) request, data);
+	if(devices->find(fd) != devices->end())
+		return (*devices)[fd]->ioctl((uint32_t) request, data);
 	printf("Ioctl to unmapped device:\n");
 	return debug_ioctl(fd, request, data);
 }

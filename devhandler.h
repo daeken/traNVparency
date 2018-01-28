@@ -24,6 +24,11 @@ public:
 	virtual int ioctl(uint32_t request, void *data);
 };
 
+class NvhostCtrlDevice : public BaseDevice {
+public:
+	virtual int ioctl(uint32_t request, void *data);
+};
+
 class NvhostCtrlGpuDevice : public BaseDevice {
 public:
 	virtual int ioctl(uint32_t request, void *data);

@@ -122,3 +122,38 @@ const char *ioctl2str(LinuxNvhostCtrlGpuIoctl value) {
 		return "UNKNOWN";
 	}
 }
+
+const char *ioctl2str(LinuxNvhostCtrlIoctl value) {
+	switch(value) {
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNC_FENCE_SET_NAME:
+		return "NVHOST_IOCTL_CTRL_SYNC_FENCE_SET_NAME";
+	case LinuxNvhostCtrlIoctl::NVHOST32_IOCTL_CTRL_SYNC_FENCE_CREATE:
+		return "NVHOST32_IOCTL_CTRL_SYNC_FENCE_CREATE";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_GET_VERSION:
+		return "NVHOST_IOCTL_CTRL_GET_VERSION";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNCPT_READ_MAX:
+		return "NVHOST_IOCTL_CTRL_SYNCPT_READ_MAX";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_MODULE_REGRDWR:
+		return "NVHOST_IOCTL_CTRL_MODULE_REGRDWR";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNCPT_INCR:
+		return "NVHOST_IOCTL_CTRL_SYNCPT_INCR";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNCPT_WAITEX:
+		return "NVHOST_IOCTL_CTRL_SYNCPT_WAITEX";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNCPT_WAITMEX:
+		return "NVHOST_IOCTL_CTRL_SYNCPT_WAITMEX";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_MODULE_MUTEX:
+		return "NVHOST_IOCTL_CTRL_MODULE_MUTEX";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_GET_CHARACTERISTICS:
+		return "NVHOST_IOCTL_CTRL_GET_CHARACTERISTICS";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNC_FENCE_CREATE:
+		return "NVHOST_IOCTL_CTRL_SYNC_FENCE_CREATE";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNCPT_READ:
+		return "NVHOST_IOCTL_CTRL_SYNCPT_READ";
+	case LinuxNvhostCtrlIoctl::NVHOST32_IOCTL_CTRL_MODULE_REGRDWR:
+		return "NVHOST32_IOCTL_CTRL_MODULE_REGRDWR";
+	case LinuxNvhostCtrlIoctl::NVHOST_IOCTL_CTRL_SYNCPT_WAIT:
+		return "NVHOST_IOCTL_CTRL_SYNCPT_WAIT";
+	default:
+		return "UNKNOWN";
+	}
+}
